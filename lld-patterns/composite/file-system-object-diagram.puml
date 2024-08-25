@@ -1,0 +1,39 @@
+@startuml
+title File System - Object Diagram
+
+object rootDir {
+    name = "root"
+}
+
+object dir1 {
+    name = "dir1"
+}
+
+object dir2 {
+    name = "dir2"
+}
+
+object file1 {
+    name = "file1.txt"
+    size = 10 KB
+}
+
+object file2 {
+    name = "file2.txt"
+    size = 20 KB
+}
+
+object file3 {
+    name = "file3.jpg"
+    size = 30 KB
+}
+
+rootDir *-- dir1 : "contains"
+rootDir *-- dir2 : "contains"
+
+dir1 *-- file1 : "contains"
+dir1 *-- file2 : "contains"
+
+dir2 *-- file3 : "contains"
+
+@enduml

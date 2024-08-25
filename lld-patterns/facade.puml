@@ -1,0 +1,46 @@
+@startuml
+title Facade Design Pattern Example
+
+class TV {
+    +void on()
+    +void off()
+}
+
+class DVDPlayer {
+    +void on()
+    +void off()
+    +void play(String movie)
+}
+
+class SoundSystem {
+    +void on()
+    +void off()
+    +void setVolume(int level)
+}
+
+class Lights {
+    +void dim()
+    +void on()
+}
+
+class HomeTheaterFacade {
+    +HomeTheaterFacade(TV tv, DVDPlayer dvdPlayer, SoundSystem soundSystem, Lights lights)
+    +void watchMovie(String movie)
+    +void endMovie()
+}
+
+class FacadePatternDemo {
+    +void main(String[] args)
+}
+
+HomeTheaterFacade o--> TV : controls
+HomeTheaterFacade o--> DVDPlayer : controls
+HomeTheaterFacade o--> SoundSystem : controls
+HomeTheaterFacade o--> Lights : controls
+
+FacadePatternDemo --> HomeTheaterFacade : uses
+
+note right of HomeTheaterFacade : Facade provides a simple interface\nfor controlling multiple components\nof the home theater system.
+note right of FacadePatternDemo : Client interacts with the facade\ninstead of dealing with individual\nsubsystem classes.
+
+@enduml

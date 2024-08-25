@@ -1,0 +1,51 @@
+@startuml
+title Restaurant Menu System - Class Diagram
+
+package "Menu System" {
+    interface MenuComponent {
+        +void show()
+        +double getPrice()
+    }
+
+    class MenuItem implements MenuComponent {
+        -String name
+        -double price
+        +MenuItem(String name, double price)
+        +void show()
+        +double getPrice()
+    }
+
+    class Menu implements MenuComponent {
+        -String name
+        -List<MenuComponent> menuComponents = new ArrayList<>()
+        +Menu(String name)
+        +void add(MenuComponent menuComponent)
+        +void remove(MenuComponent menuComponent)
+        +void show()
+        +double getPrice()
+    }
+}
+
+class Client {
+    +static void main(String[] args)
+}
+
+Menu o-- MenuComponent : "aggregates"
+
+Client --> MenuComponent : "interacts with"
+
+note top of Client
+  "Client interacts with the menu system,
+  creating and displaying menus."
+end note
+
+note bottom of MenuItem
+  "Represents a simple menu item."
+end note
+
+note bottom of Menu
+  "Represents a composite menu,
+  containing other menu components."
+end note
+
+@enduml

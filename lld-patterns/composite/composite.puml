@@ -1,0 +1,52 @@
+@startuml
+title Composite Design Pattern - Drawing Shapes
+
+package "Components" {
+    interface Graphic {
+        +void draw()
+    }
+}
+note bottom of Graphic
+      Defines common operations
+      for leaves and composites
+    end note
+
+package "LeafNodes" {
+    class Circle {
+        +void draw()
+    }
+
+    class Square {
+        +void draw()
+    }
+}
+ note bottom of Circle
+      "Represents a simple object
+      with no children"
+    end note
+
+    note bottom of Square
+      "Represents a simple object
+      with no children"
+    end note
+
+package "CompositeNodes" {
+    class CompositeGraphic {
+        +void add(Components.Graphic graphic)
+        +void remove(Components.Graphic graphic)
+        +List<Components.Graphic> getChildGraphics()
+        +void draw()
+    }
+}
+note bottom of CompositeGraphic
+      "Can contain child components,
+      which can be leaves or other composites"
+    end note
+
+Components.Graphic <|.. LeafNodes.Circle
+Components.Graphic <|.. LeafNodes.Square
+Components.Graphic <|.. CompositeNodes.CompositeGraphic
+
+CompositeNodes.CompositeGraphic o-- Components.Graphic : "contains"
+
+@enduml

@@ -1,0 +1,64 @@
+@startuml
+title Restaurant Menu System - Object Diagram
+
+package "Menus" {
+    object mainMenu {
+        name = "Main Menu"
+    }
+
+    object breakfastMenu {
+        name = "Breakfast Menu"
+    }
+
+    object lunchMenu {
+        name = "Lunch Menu"
+    }
+
+    object dessertMenu {
+        name = "Dessert Menu"
+    }
+}
+
+package "Menu Items" {
+    object coffee {
+        name = "Coffee"
+        price = "$3.0"
+    }
+
+    object sandwich {
+        name = "Sandwich"
+        price = "$5.0"
+    }
+
+    object pasta {
+        name = "Pasta"
+        price = "$8.5"
+    }
+
+    object cake {
+        name = "Cake"
+        price = "$4.5"
+    }
+}
+
+
+mainMenu *-- breakfastMenu : "contains"
+mainMenu *-- lunchMenu : "contains"
+mainMenu *-- dessertMenu : "contains"
+
+breakfastMenu *-- coffee : "contains"
+breakfastMenu *-- sandwich : "contains"
+
+lunchMenu *-- pasta : "contains"
+lunchMenu *-- sandwich : "contains"
+
+dessertMenu *-- cake : "contains"
+dessertMenu *-- coffee : "contains"
+
+
+note bottom of mainMenu
+  "Total price: $24.5
+  Includes all items in the sub-menus"
+end note
+
+@enduml

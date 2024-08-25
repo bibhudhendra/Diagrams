@@ -1,0 +1,27 @@
+@startuml
+interface ReportService {
+    +String generateReport(String reportName)
+}
+
+class RealReportService {
+    +String generateReport(String reportName)
+}
+
+class ReportServiceProxy {
+    -RealReportService realReportService
+    -Map<String, String> cache
+    +ReportServiceProxy()
+    +String generateReport(String reportName)
+}
+
+class ProxyPatternComplexExample {
+    +void main(String[] args)
+}
+
+ReportService <|.. RealReportService
+ReportService <|.. ReportServiceProxy
+ReportServiceProxy o--> RealReportService
+
+ProxyPatternComplexExample --> ReportServiceProxy : uses
+
+@enduml

@@ -1,0 +1,71 @@
+@startuml
+title Adapter Design Pattern - Payment Gateway Example
+
+interface PaymentGateway {
+    +void processPayment(String paymentType, double amount)
+}
+
+class PayPal {
+    +void makePayment(double amount)
+}
+
+class Stripe {
+    +void sendPayment(double amount)
+}
+
+class Square {
+    +void charge(double amount)
+}
+
+class PayPalAdapter implements PaymentGateway {
+    -PayPal payPal
+    +PayPalAdapter(PayPal payPal)
+    +void processPayment(String paymentType, double amount)
+}
+
+class StripeAdapter implements PaymentGateway {
+    -Stripe stripe
+    +StripeAdapter(Stripe stripe)
+    +void processPayment(String paymentType, double amount)
+}
+
+class SquareAdapter implements PaymentGateway {
+    -Square square
+    +SquareAdapter(Square square)
+    +void processPayment(String paymentType, double amount)
+}
+
+class PaymentProcessor {
+    -PaymentGateway paymentGateway
+    +void setPaymentGateway(PaymentGateway paymentGateway)
+    +void processPayment(String paymentType, double amount)
+}
+
+class AdapterPatternComplexDemo {
+    +void main(String[] args)
+}
+
+PaymentGateway <|.. PayPalAdapter
+PaymentGateway <|.. StripeAdapter
+PaymentGateway <|.. SquareAdapter
+
+PayPalAdapter o--> PayPal : adapts
+StripeAdapter o--> Stripe : adapts
+SquareAdapter o--> Square : adapts
+
+PaymentProcessor --> PaymentGateway : uses
+AdapterPatternComplexDemo --> PaymentProcessor : uses
+
+note right of PaymentGateway : Target Interface
+
+note right of PayPal : Adaptee
+note right of Stripe : Adaptee
+note right of Square : Adaptee
+
+note right of PayPalAdapter : Adapter
+note right of StripeAdapter : Adapter
+note right of SquareAdapter : Adapter
+
+note right of PaymentProcessor : Client
+
+@enduml

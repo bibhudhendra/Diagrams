@@ -1,0 +1,71 @@
+@startuml
+title Multi-Dimensional Bridge Pattern
+
+package "Implementor - Color" {
+    interface Color {
+        +String fill()
+    }
+
+    class RedColor implements Color {
+        +String fill()
+    }
+
+    class BlueColor implements Color {
+        +String fill()
+    }
+}
+
+package "Implementor - Texture" {
+    interface Texture {
+        +String applyTexture()
+    }
+
+    class SmoothTexture implements Texture {
+        +String applyTexture()
+    }
+
+    class RoughTexture implements Texture {
+        +String applyTexture()
+    }
+}
+
+package "Abstraction - Shape" {
+    abstract class Shape {
+        protected Color color
+        protected Texture texture
+        +Shape(Color c, Texture t)
+        +abstract String draw()
+    }
+
+    class Square extends Shape {
+        +Square(Color c, Texture t)
+        +String draw()
+    }
+
+    class Circle extends Shape {
+        +Circle(Color c, Texture t)
+        +String draw()
+    }
+}
+
+Shape o-- Color : "uses for color"
+Shape o-- Texture : "uses for texture"
+
+Color <|.. RedColor
+Color <|.. BlueColor
+
+Texture <|.. SmoothTexture
+Texture <|.. RoughTexture
+
+note bottom of Color
+    Implementor in the Bridge Pattern
+    Defines color filling behavior
+end note
+note bottom of Texture
+    Implementor in the Bridge Pattern
+    Defines texture application
+end note
+note right of Shape : "Abstraction in the Bridge Pattern\nUtilizes both Color and Texture"
+
+@enduml
+
