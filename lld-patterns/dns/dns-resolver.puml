@@ -1,0 +1,94 @@
+@startuml
+actor User #lightblue
+participant Browser #lightgreen
+participant "Browser Cache" #lightyellow
+participant "OS Cache" #lightyellow
+participant "DNS Resolver" #lightpink
+participant "Root Name Server" #lightgray
+participant "TLD Nameeifjcbfukjgjujudnjevdlrflkjibhujhudbhjddvnkf
+ Server" #lightgray
+participant "Authoritative Name Server" #lightgray
+participant "Web Server" #lightcoral
+
+note over User #lightblue
+The person initiating
+the request by typing
+a URL.
+end note
+
+note over Browser #lightgreen
+Web browser requesting
+the DNS resolution and
+rendering the web page.
+end note
+
+note over "Browser Cache" #lightyellow
+Stores recent DNS lookups
+locally. Can resolve the query
+without further DNS requests.
+end note
+
+note over "OS Cache" #lightyellow
+The operating system's DNS cache
+stores recent lookups, helping
+speed up resolution.
+end note
+
+note over "DNS Resolver" #lightpink
+Typically provided by the ISP.
+It recursively queries DNS records
+on behalf of the user.
+end note
+
+note over "Root Name Server" #lightgray
+There are 13 sets of root name
+servers in the world, operated by
+different organizations.
+end note
+
+note over "TLD Name Server" #lightgray
+The Top-Level Domain (TLD) servers
+handle queries for specific domain
+extensions like .com, .org, etc.
+end note
+
+note over "Authoritative Name Server" #lightgray
+The definitive source for DNS
+records for a specific domain.
+end note
+
+note over "Web Server" #lightcoral
+Hosts the website and
+responds to the browser's
+HTTP request.
+end note
+
+User -> Browser : (1) Type FQDN in Browser
+Browser -> "Browser Cache" : (2) Check for IP
+alt IP found
+    Browser -> User : (3) Render Web Page
+else IP not found
+    Browser -> "OS Cache" : (3) Check for IP
+    alt IP found
+        Browser -> User : (4) Render Web Page
+    else IP not found
+        "OS Cache" -> "DNS Resolver" : (4) Query DNS Resolver
+
+        "DNS Resolver" -> "Root Name Server" : (5) Query Root Name Server
+        "Root Name Server" -> "DNS Resolver" : (6) Respond with TLD Server
+
+        "DNS Resolver" -> "TLD Name Server" : (7) Query TLD Name Server
+        "TLD Name Server" -> "DNS Resolver" : (8) Respond with Authoritative Name Server
+
+        "DNS Resolver" -> "Authoritative Name Server" : (9) Query for Domain IP
+        "Authoritative Name Server" -> "DNS Resolver" : (10) Respond with IP Address
+
+        "DNS Resolver" -> "OS Cache" : (11) Store IP Address in Cache
+        "OS Cache" -> Browser : (12) Return IP Address
+
+        Browser -> "Web Server" : (13) Connect to Web Server
+        "Web Server" -> Browser : (14) Return Web Page Data
+        Browser -> User : (15) Render Web Page
+    end
+end
+@enduml

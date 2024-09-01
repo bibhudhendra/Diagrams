@@ -1,0 +1,23 @@
+@startuml
+
+package "User's System" {
+  [Browser]
+}
+
+package "DNS Infrastructure" {
+  [DNS Resolver (ISP DNS)]
+  [Root Server]
+  [TLD Server (.com)]
+  [Authoritative Name Server (example.com)]
+}
+
+[Browser] --> [DNS Resolver (ISP DNS)] : 1. DNS Query for www.example.com
+[DNS Resolver (ISP DNS)] --> [Root Server] : 2. Query for TLD server
+[Root Server] --> [DNS Resolver (ISP DNS)] : 3. Return TLD server (.com)
+[DNS Resolver (ISP DNS)] --> [TLD Server (.com)] : 4. Query for authoritative server
+[TLD Server (.com)] --> [DNS Resolver (ISP DNS)] : 5. Return authoritative server (example.com)
+[DNS Resolver (ISP DNS)] --> [Authoritative Name Server (example.com)] : 6. Query for IP address
+[Authoritative Name Server (example.com)] --> [DNS Resolver (ISP DNS)] : 7. Return IP address
+[DNS Resolver (ISP DNS)] --> [Browser] : 8. Return IP address to browser
+
+@enduml
