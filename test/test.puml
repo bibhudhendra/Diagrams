@@ -1,0 +1,12 @@
+@startmindmap
+* Root
+** Topic 1 <&star>
+*** <b>Bold</b> and <i>Italic</i>
+*** [[https://example.com Link]]
++++ Right side topic\nwith multiple lines
+-- Left side topic
+---_ Child without connecting line
+*** Special node
+** Math: α + β = γ
+** Emoji :smiley:
+@endmindmap
