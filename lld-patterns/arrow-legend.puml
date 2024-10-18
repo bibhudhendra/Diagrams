@@ -1,0 +1,12 @@
+@startuml
+legend right
+  == Class Associations Legend ==
+  -- Associations --
+  * "--" : Association
+  * "..>" : Dependency
+  * "<|--" : Inheritance
+  * "<|.." : Implement
+  * "*--" : Composition
+  * "o--" : Aggregation
+endlegend
+@enduml
