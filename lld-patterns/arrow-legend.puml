@@ -6,7 +6,7 @@ legend right
   * "..>" : Dependency
   * "<|--" : Inheritance
   * "<|.." : Implement
-  * "*--" : Composition
-  * "o--" : Aggregation
+  * "*--" : Composition (A is a composition of multiple B)
+  * "o--" : Aggregation (A is an Aggregation of multiple B)
 endlegend
 @enduml

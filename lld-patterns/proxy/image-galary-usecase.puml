@@ -1,0 +1,51 @@
+@startuml
+' Define the Image interface
+interface Image {
+    +display(): void
+}
+
+' RealImage class implements Image
+class RealImage {
+    -filename: String
+    +RealImage(filename: String)
+    -loadFromDisk(): void
+    +display(): void
+    +getFilename(): String
+}
+
+Image <|.. RealImage
+
+' ProxyImage class implements Image
+class ProxyImage {
+    -realImage: RealImage
+    -filename: String
+    -user: User
+    +ProxyImage(filename: String, user: User)
+    +display(): void
+    -userHasAccess(): boolean
+}
+
+Image <|.. ProxyImage
+
+' User class
+class User {
+    -username: String
+    -permissions: Set<String>
+    +User(username: String)
+    +getUsername(): String
+    +grantPermission(permission: String): void
+    +hasPermission(permission: String): boolean
+}
+
+' PhotoGalleryApp class (Main Application)
+class PhotoGalleryApp {
+    +main(args: String[]): void
+}
+
+' Relationships
+ProxyImage --> RealImage : uses
+ProxyImage --> User : references
+PhotoGalleryApp --> ProxyImage : creates
+PhotoGalleryApp --> User : creates
+
+@enduml

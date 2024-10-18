@@ -1,0 +1,32 @@
+@startuml
+class User {
+    browse()
+}
+
+class CloudGalary {
+    images: List<Image> 
+    showImages()
+}
+
+User --> CloudGalary
+
+interface Image {
+    showImage()
+}
+
+class ProxyImage {
+    showImage()
+    click()
+}
+
+CloudGalary --> ProxyImage
+
+class RealImage {
+    showImage()
+}
+Image <|.. ProxyImage
+Image <|.. RealImage
+
+ProxyImage --> RealImage
+
+@enduml
