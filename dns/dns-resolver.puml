@@ -5,8 +5,7 @@ participant "Browser Cache" #lightyellow
 participant "OS Cache" #lightyellow
 participant "DNS Resolver" #lightpink
 participant "Root Name Server" #lightgray
-participant "TLD Nameeifjcbfukjgjujudnjevdlrflkjibhujhudbhjddvnkf
- Server" #lightgray
+participant "TLD Name Server" #lightgray
 participant "Authoritative Name Server" #lightgray
 participant "Web Server" #lightcoral
 
